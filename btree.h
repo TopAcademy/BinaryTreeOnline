@@ -1,6 +1,7 @@
 // btree.h
 // Binary tree class
 #pragma once
+#include <stack>
 #include "node.h"
 
 class BTree
@@ -8,9 +9,15 @@ class BTree
 private:
 	Node* top;
 public:
+	// Constructors
 	BTree() : top{nullptr} {};
-	void display(Node* top);
-	Node* insert(int v, Node* n);
+	// Display methods
+	void display(Node* top);		// display tree with recursion
+	void display_nr();				// display tree WITHOUT recursion
+	// Elements edit
+	Node* insert(int v, Node* n);	// insert element with recursion
+	Node* insert_nr(int v);			// insert element WITHOUT recursion
+	// Search metods
 	void find(int v);
 };
 
@@ -50,7 +57,12 @@ Node* BTree::insert(int v, Node * n = nullptr)
 	}
 }
 
-void BTree::display(Node* n = nullptr) {
+
+// Display tree (V method with recursion)
+//
+void BTree::display(Node* n = nullptr) 
+{
+	if (n==nullptr) std::cout << "Displaying the tree with recursion" << std::endl;
 	if (n == nullptr) n = this->top;
 	if (n == nullptr) return;
 
@@ -60,4 +72,41 @@ void BTree::display(Node* n = nullptr) {
 	std::cout << n->value << " ";
 	if(n->p_right != nullptr)
 		display(n->p_right);
+}
+
+
+// Display tree (X method without recursion)
+//
+void BTree::display_nr()
+{
+	std::cout << "Displaying the tree without recursion" << std::endl;
+	Node* n = this->top;			// start from top node
+	if (n == nullptr) return;		// if the tree is empty
+	std::stack<Node*> st;
+	do {
+		if ((!st.empty()) && (n == st.top())) {
+			// we came back
+			st.pop();
+		}
+		else if (n->p_left) {
+			// we arrived the node first time
+			st.push(n);
+			n = n->p_left;
+			continue;
+		}
+		std::cout << n->value << ", ";
+		if (n->p_right) {
+			n = n->p_right;
+			continue;
+		}
+		else {
+			// go back (up)
+			if (!st.empty()) {
+				n = st.top();
+				continue;
+			}
+			else n = nullptr;
+		}
+	} while (n);
+
 }

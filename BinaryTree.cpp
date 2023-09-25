@@ -15,5 +15,16 @@ int main()
 	tree.insert(2);
 
 	tree.display();
+	cout << endl;
+	tree.display_nr();
 }
 
+/*
+           8
+          / \
+        3     10
+       / \      \
+	 1	  4      13
+	  \
+	   2
+*/
