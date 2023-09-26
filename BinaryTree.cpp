@@ -17,6 +17,12 @@ int main()
 	tree.display();
 	cout << endl;
 	tree.display_nr();
+	cout << endl;
+	if (tree.find(14) == nullptr)
+		cout << "not found";
+	else
+		cout << tree.find(14)->value;
+
 }
 
 /*
