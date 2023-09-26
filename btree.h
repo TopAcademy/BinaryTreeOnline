@@ -18,7 +18,7 @@ public:
 	Node* insert(int v, Node* n);	// insert element with recursion
 	Node* insert_nr(int v);			// insert element WITHOUT recursion
 	// Search metods
-	void find(int v);
+	Node* find(int v, Node* c);
 };
 
 // Insert new node to the tree
@@ -155,3 +155,20 @@ void BTree::display_nr()
 
 }
 
+
+// Find node with given value in the tree
+//
+Node* BTree::find(int v, Node* c = nullptr)
+{
+	if (c == nullptr) c = this->top;
+	if (c == nullptr) return nullptr;
+	if (v == c->value) return c;
+	if (v < c->value) {
+		if (!c->p_left) return nullptr;
+		else find(v, c->p_left);
+	}
+	if (v > c->value) {
+		if (!c->p_right) return nullptr;
+		else find(v, c->p_right);
+	}
+}

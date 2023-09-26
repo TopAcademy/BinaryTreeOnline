@@ -17,6 +17,9 @@ int main()
 	tree.display();
 	cout << endl;
 	tree.display_nr();
+	Node* f = tree.find(12);
+	if (f) cout << "\nFound: " << f->value << endl;
+	else cout << "\nNot found..." << endl;
 }
 
 /*
