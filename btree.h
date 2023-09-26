@@ -58,6 +58,50 @@ Node* BTree::insert(int v, Node * n = nullptr)
 }
 
 
+// Insert new node (X method without recursion)
+//
+Node* BTree::insert_nr(int v)
+{
+	Node* x = new Node(v);		// node to insert
+	Node* c = this->top;		// current node
+	if (c == nullptr) {
+		// if tree is empty
+		this->top = x;
+		return x;
+	}
+	while (true) {
+		if (x->value < c->value) {
+			// Look to left side
+			if (!c->p_left) {
+				// insert to the left and break
+				c->p_left = x;
+				x->p_parent = c;
+				return x;
+			}
+			else {
+				// go down to the left and continue
+				c = c->p_left;
+				continue;
+			}
+		}
+		else if (x->value > c->value) {
+			// Look to right side
+			if (!c->p_right) {
+				// insert to the right and break
+				c->p_right = x;
+				x->p_parent = c;
+				return x;
+			}
+			else {
+				// go down to the right and continue
+				c = c->p_right;
+				continue;
+			}
+		}
+	}
+}
+
+
 // Display tree (V method with recursion)
 //
 void BTree::display(Node* n = nullptr) 
@@ -110,3 +154,4 @@ void BTree::display_nr()
 	} while (n);
 
 }
+

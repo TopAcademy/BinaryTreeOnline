@@ -6,13 +6,13 @@ using namespace std;
 int main()
 {
 	BTree tree;
-	tree.insert(8);
-	tree.insert(3);
-	tree.insert(10);
-	tree.insert(13);
-	tree.insert(1);
-	tree.insert(4);
-	tree.insert(2);
+	tree.insert_nr(8);
+	tree.insert_nr(3);
+	tree.insert_nr(10);
+	tree.insert_nr(13);
+	tree.insert_nr(1);
+	tree.insert_nr(4);
+	tree.insert_nr(2);
 
 	tree.display();
 	cout << endl;
